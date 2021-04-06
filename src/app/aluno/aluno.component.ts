@@ -10,12 +10,11 @@ export class AlunoComponent implements OnInit {
   titulo = 'Alunos';
 
   public alunos = [
-    { nome: 'Marta'},
-    { nome: 'Paula'},
-    { nome: 'Laura'},
-    { nome: 'Luiza'},
-    { nome: 'Lucas'},
-    { nome: 'Pedro'},
+    {id:1, nome: 'Marta', sobrenome: 'Maria', telefone: 76876883},
+    {id:2, nome: 'Paula', sobrenome: 'Lovsk', telefone: 76876883},
+    {id:3, nome: 'Laura', sobrenome: 'Lenin', telefone: 76876883},
+    {id:4, nome: 'Luiza', sobrenome: 'Lennir', telefone: 76876883},
+    {id:5, nome: 'Edina', sobrenome: 'Hens', telefone: 76876883}
   ]
   
   constructor() { }
