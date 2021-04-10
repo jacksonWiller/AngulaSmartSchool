@@ -7,7 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AlunoComponent implements OnInit {
 
-  titulo = 'Alunos';
+
+  
+  public titulo = 'Alunos';
+  public alunoSelecionado: string;
+
 
   public alunos = [
     {id:1, nome: 'Marta', sobrenome: 'Maria', telefone: 76876883},
@@ -16,6 +20,10 @@ export class AlunoComponent implements OnInit {
     {id:4, nome: 'Luiza', sobrenome: 'Lennir', telefone: 76876883},
     {id:5, nome: 'Edina', sobrenome: 'Hens', telefone: 76876883}
   ]
+
+  alunoSelecedt(aluno: any){
+    this.alunoSelecionado = aluno.nome;
+  }
   
   constructor() { }
 
