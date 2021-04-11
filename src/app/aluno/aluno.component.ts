@@ -21,8 +21,12 @@ export class AlunoComponent implements OnInit {
     {id:5, nome: 'Edina', sobrenome: 'Hens', telefone: 76876883}
   ]
 
-  alunoSelecedt(aluno: any){
+  alunoSelect(aluno: any){
     this.alunoSelecionado = aluno.nome;
+  }
+
+  voltar(){
+    this.alunoSelecionado = '';
   }
   
   constructor() { }
