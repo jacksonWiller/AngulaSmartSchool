@@ -1,31 +1,77 @@
 
-<div *ngIf="alunoSelecionado">
-  <app-titulo [titulo]="'Aluno:' + alunoSelecionado"></app-titulo>
- 
-  <br>
-  <button class="btn btn-default" (click)="voltar()" >Voltar</button>
-</div>
 
-<div *ngIf="!alunoSelecionado" >
+<div class="row">
+  
+  <div class="col-sm-6" *ngIf="alunoSelecionado && alunoSelecionado.id">
+    <div class="row">
+      <div class="mr-auto">
+        <app-titulo [titulo]="'Código: ' + alunoSelecionado.id"></app-titulo>
+      </div>
+      <div class="mt-1">
+        <button class="btn btn-danger" (click)="voltar()" >Voltar</button>
+      </div>
+    </div>
+    
+    <form [formGroup]="alunoForm" (submit)="alunoSubmit()" >
+    <div class="form-group">
+      <label for="formGroupExempleInput">Nome</label>
+      <input type="text" formControlName="nome" class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="formGroupExempleInput">Sobrenome</label>
+      <input type="text" formControlName="sobrenome" class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="formGroupExempleInput">Telefone</label>
+      <input type="text" formControlName="telefone" class="form-control">
+    </div>
+    <div class="form-group">
+      <hr>
+      <button type="submit" class="btn btn-success" [disabled]="!alunoForm.valid" >Enviar</button>
+    </div>
+  </form>
+  </div>
+  
+  <div [ngClass]="{'col-sm-6': alunoSelecionado && alunoSelecionado.id, 'col-sm-12': !alunoSelecionado || alunoSelecionado.id == null}">
     <app-titulo [titulo]="'Alunos'"></app-titulo>
-
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Nome</th>
-        <th scope="col">Sobrenome</th>
-        <th scope="col">Telefone</th>
-      </tr>
-    </thead>
-<tbody>
-    <tr *ngFor="let aluno of alunos" style="cursor: pointer" (click)="alunoSelect(aluno)" >
-        <th scope="row">1</th>
-        <td>{{aluno.nome}}</td>
-        <td>{{aluno.sobrenome}}</td>
-        <td>{{aluno.telefone}}</td>    
-     </tr>
-</tbody>
-</table>
+    
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Visialisar</th>
+          <th scope="col">#</th>
+          <th scope="col">Nome</th>
+          <th scope="col">Sobrenome</th>
+          <th scope="col">Telefone</th>
+          <th scope="col">Opções</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let aluno of alunos" >
+          <td> <button (click)="alunoSelect(aluno)" class="btn btn-sm btn-outline-warning">detalhe</button>  </td>
+          <td scope="row">{{aluno.id}}</td>
+          <td>{{aluno.nome}}</td>
+          <td>{{aluno.sobrenome}}</td>
+          <td>{{aluno.telefone}}</td> 
+          <td>
+            <div>    
+              <button (click)="openModal(template)" class="btn btn-sm btn-outline-primary">Professores</button>
+              <button class="btn btn-sm btn-outline-danger">Desativar</button>
+            </div>
+          </td>  
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
-
+<ng-template #template>
+  <div class="modal-body">
+    <app-professor></app-professor>
+  </div>
+  <div class="modal-footer">
+      <button type="button" class="btn pull-right" aria-label="Close" 
+          (click)="modalRef.hide()">
+          FECHAR
+      </button>
+  </div>
+</ng-template>
